@@ -1,0 +1,43 @@
+name: SeikatsuPlugin
+version: '1.0-SNAPSHOT'
+main: io.github.guy7cc.seikatsu.SeikatsuPlugin
+api-version: '1.21'
+
+commands:
+  sit:
+    description: You can sit here.
+    permission: seikatsu.command.sit
+    permission-message: You do not have permission to perform this command.
+  hat:
+    description: Put an item you have in the main hand on the head.
+    permission: seikatsu.command.hat
+    permission-message: You do not have permission to perform this command.
+  info:
+    description: Turn on or off the gui of this plugin.
+    permission: seikatsu.command.info
+    permission-message: You do not have permission to perform this command.
+  addmsg:
+    description: Add a message above.
+    permission: seikatsu.command.addmsg
+    permission-message: You do not have permission to perform this command.
+  removemsg:
+    description: Remove the message above.
+    permission: seikatsu.command.removemsg
+    permission-message: You do not have permission to perform this command.
+
+permissions:
+  seikatsu.command.sit:
+    description: You can sit here.
+    default: true
+  seikatsu.command.hat:
+    description: You can put an item you have in the main hand on the head.
+    default: true
+  seikatsu.command.info:
+    description: You can turn on or off the gui of this plugin.
+    default: true
+  seikatsu.command.addmsg:
+    description: You can add a message above.
+    default: true
+  seikatsu.command.removemsg:
+    description: You can remove the message above.
+    default: true
