@@ -9,6 +9,7 @@ import io.github.guy7cc.seikatsu.system.OnlinePlayerStatusManager;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.player.*;
 
 public class PlayerEventHandler implements Listener {
@@ -27,17 +28,9 @@ public class PlayerEventHandler implements Listener {
         onlinePlayerStatus.onPlayerJoin(event.getPlayer());
         offlinePlayerStatus.onPlayerJoin(event.getPlayer());
         playerGui.onPlayerJoin(event.getPlayer());
-        TextComponent message = new TextComponent(
-                "§9゜+.――゜+.――゜§f73回生生活鯖へようこそ！§9゜+.――゜+.――゜\n" +
-                        "§f以下のプラグインコマンドを利用することができます！\n" +
-                        "§b/sit §fその場に座ります。\n" +
-                        "§b/hat §f利き手に持っているアイテムを頭に乗せます。\n" +
-                        "§b/info §fGUIの表示・非表示を切り替えます。\n" +
-                        "§b/addmsg §f画面上に表示するメッセージを追加します。\n" +
-                        "§b/removemsg §f現在画面上に表示されているメッセージだけを削除します。\n" +
-                        "§9゜+.――゜゜+.――゜゜+.――゜゜+.――゜゜+.――゜゜+.――゜゜+.――゜"
-        );
-        event.getPlayer().spigot().sendMessage(message);
+        for(String str : SeikatsuPlugin.joinMessage){
+            event.getPlayer().sendMessage(str);
+        }
     }
 
     @EventHandler
@@ -65,5 +58,20 @@ public class PlayerEventHandler implements Listener {
         OnlinePlayerStatus status = onlinePlayerStatus.get(event.getPlayer());
         if(status == null) return;
         status.onExpChange(event.getAmount());
+    }
+
+    @EventHandler
+    public void onPlayerEnchant(EnchantItemEvent event){
+        OfflinePlayerStatus status = SeikatsuPlugin.offlinePlayerStatus.get(event.getEnchanter());
+        if(status == null) return;
+        status.addXp(1);
+    }
+
+    @EventHandler
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event){
+        if(SeikatsuPlugin.forbiddenCommands.matcher(event.getMessage()).find()){
+            event.setCancelled(true);
+            event.getPlayer().sendMessage("§cそのコマンドは無効化されています。");
+        }
     }
 }

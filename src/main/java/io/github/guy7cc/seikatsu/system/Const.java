@@ -9,10 +9,15 @@ public class Const {
             54537, 64191, 75555, 86922, 99999
     };
 
+    public static String[] RANK = new String[]{ "§f【赤ちゃん】", "§f【子供】", "§a【一人暮らし】", "§a【会社員】", "§b【家庭持ち】", "§b【一軒家住まい】", "§d【家政婦】", "§c【家】", "§4【ママ】"};
+
     public static String getRank(int level){
-        String[] rank = new String[]{ "§f【赤ちゃん】", "§f【子供】", "§a【一人暮らし】", "§a【会社員】", "§b【家庭持ち】", "§b【一軒家住まい】", "§d【家政婦】", "§c【家】", "§4【ママ】"};
-        if(1 <= level && level < 25) return rank[(level - 1) / 3];
-        else if(level >= 25) return rank[8];
-        else return rank[0];
+        if(1 <= level && level < 25) return RANK[(level - 1) / 3];
+        else if(level >= 25) return RANK[8];
+        else return RANK[0];
+    }
+
+    public static String getRankColor(int level){
+        return getRank(level).substring(0, 2);
     }
 }

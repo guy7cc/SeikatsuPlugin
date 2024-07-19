@@ -47,6 +47,6 @@ public class OfflinePlayerStatusManager {
             map.put(player.getName(), new OfflinePlayerStatus(player));
         }
         OfflinePlayerStatus status = get(player);
-        player.setPlayerListName(Const.getRank(status.getLevel()) + player.getName());
+        player.setPlayerListName(Const.getRank(status.getLevel()) + "§f" + player.getName());
     }
 }

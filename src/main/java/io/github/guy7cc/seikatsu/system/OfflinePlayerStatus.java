@@ -71,11 +71,11 @@ public class OfflinePlayerStatus extends ExtendedJsonObjectWrapper {
             setXp(xp + value - getMaxXp(level));
             setLevel(level + 1);
             Player p = Bukkit.getPlayer(getPlayerName());
-            if(p != null) p.setPlayerListName(Const.getRank(level + 1) + p.getName());
+            if(p != null) p.setPlayerListName(Const.getRank(level + 1) + "§f" + p.getName());
             for(Player player : Bukkit.getOnlinePlayers()){
-                player.spigot().sendMessage(new TextComponent("§b" + getPlayerName() + "§fが生活Lv." + (level + 1) + "に上がりました！"));
+                player.spigot().sendMessage(new TextComponent(Const.getRankColor(level) + getPlayerName() + "§fが生活Lv." + (level + 1) + "に上がりました！"));
                 if(!Const.getRank(level).equals(Const.getRank(level + 1))){
-                    player.spigot().sendMessage(new TextComponent("§b" + getPlayerName() + "§fが" + Const.getRank(level + 1) + "§fに昇格しました！"));
+                    player.spigot().sendMessage(new TextComponent(Const.getRankColor(level) + getPlayerName() + "§fが" + Const.getRank(level + 1) + "§fに昇格しました！"));
                 }
             }
         } else {

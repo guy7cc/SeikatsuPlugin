@@ -1,9 +1,11 @@
 io\github\guy7cc\seikatsu\command\InfoCommand.class
 io\github\guy7cc\seikatsu\gui\PlayerGui.class
+io\github\guy7cc\seikatsu\system\CoordManager$Coord.class
 io\github\guy7cc\seikatsu\command\SitCommand.class
 io\github\guy7cc\seikatsu\system\OfflinePlayerStatusManager.class
 io\github\guy7cc\seikatsu\system\OnlinePlayerStatus.class
 io\github\guy7cc\seikatsu\system\ProfiledTimer$Tracker.class
+io\github\guy7cc\seikatsu\event\ServerEventHandler.class
 io\github\guy7cc\seikatsu\io\UuidAdapter.class
 io\github\guy7cc\seikatsu\system\Const.class
 io\github\guy7cc\seikatsu\system\Tickable.class
@@ -16,6 +18,7 @@ io\github\guy7cc\seikatsu\command\RemoveMsgCommand.class
 io\github\guy7cc\seikatsu\gui\PlayerGuiManager.class
 io\github\guy7cc\seikatsu\gui\sidebar\Sidebar.class
 io\github\guy7cc\seikatsu\system\MessageBarManager.class
+io\github\guy7cc\seikatsu\gui\sidebar\CoordComponent.class
 io\github\guy7cc\seikatsu\system\OnlinePlayerStatusManager.class
 io\github\guy7cc\seikatsu\command\HatCommand.class
 io\github\guy7cc\seikatsu\event\BlockEventHandler.class
@@ -32,5 +35,7 @@ io\github\guy7cc\seikatsu\system\LoggerWrapper.class
 io\github\guy7cc\seikatsu\gui\sidebar\SidebarComponent.class
 io\github\guy7cc\seikatsu\event\EntityEventHandler.class
 io\github\guy7cc\seikatsu\system\GeneralTicker.class
+io\github\guy7cc\seikatsu\system\CoordManager.class
+io\github\guy7cc\seikatsu\command\CoordCommand.class
 io\github\guy7cc\seikatsu\SeikatsuPlugin.class
 io\github\guy7cc\seikatsu\io\JsonObjectWrapper.class

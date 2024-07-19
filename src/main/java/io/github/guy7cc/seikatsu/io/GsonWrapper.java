@@ -14,6 +14,7 @@ public class GsonWrapper {
     public GsonWrapper() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(UUID.class, new UuidAdapter())
+                .setPrettyPrinting()
                 .create();
     }
 
@@ -31,7 +32,7 @@ public class GsonWrapper {
         try {
             file.getParentFile().mkdirs();
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
-            writer.write(element.toString());
+            writer.write(gson.toJson(element));
             writer.close();
         } catch (IOException exception) {
             SeikatsuPlugin.log.exception(String.format("%s could not be saved due to I/O errors.", fileName), exception);

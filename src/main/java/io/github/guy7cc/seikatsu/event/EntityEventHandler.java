@@ -3,13 +3,11 @@ package io.github.guy7cc.seikatsu.event;
 import io.github.guy7cc.seikatsu.SeikatsuPlugin;
 import io.github.guy7cc.seikatsu.system.OfflinePlayerStatus;
 import io.github.guy7cc.seikatsu.system.OnlinePlayerStatus;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityBreedEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityTameEvent;
+import org.bukkit.event.entity.*;
 
 public class EntityEventHandler implements Listener {
     @EventHandler
@@ -35,8 +33,7 @@ public class EntityEventHandler implements Listener {
         if(event.getDamageSource().getCausingEntity() instanceof Player player){
             OfflinePlayerStatus status = SeikatsuPlugin.offlinePlayerStatus.get(player);
             if(status == null) return;
-            if(event.getEntity() instanceof Enderman) status.addXp(2);
-            else if(event.getEntity() instanceof ElderGuardian) status.addXp(200);
+            if(event.getEntity() instanceof ElderGuardian) status.addXp(200);
             else if(event.getEntity() instanceof Wither) status.addXp(300);
             else if(event.getEntity() instanceof Warden) status.addXp(300);
             else if(event.getEntity() instanceof EnderDragon) status.addXp(500);
@@ -51,6 +48,17 @@ public class EntityEventHandler implements Listener {
             OfflinePlayerStatus status = SeikatsuPlugin.offlinePlayerStatus.get(player);
             if(status == null) return;
             status.addXp(15);
+        }
+    }
+
+    @EventHandler
+    public void onVillagerAcquireTrade(VillagerAcquireTradeEvent event){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(player.getLocation().distance(event.getEntity().getLocation()) < 10){
+                OfflinePlayerStatus status = SeikatsuPlugin.offlinePlayerStatus.get(player);
+                if(status == null) return;
+                status.addXp(1);
+            }
         }
     }
 }

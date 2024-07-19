@@ -33,16 +33,16 @@ public class OnlinePlayerStatus implements Tickable {
 
     public void onBlockBreak(){
         ++brokenBlock;
-        if(brokenBlock >= 10) {
-            brokenBlock -= 10;
+        if(brokenBlock >= 3) {
+            brokenBlock -= 3;
             addXp(1);
         }
     }
 
     public void onBlockPlace(){
         ++placedBlock;
-        if(placedBlock >= 20) {
-            placedBlock -= 20;
+        if(placedBlock >= 5) {
+            placedBlock -= 5;
             addXp(1);
         }
     }
