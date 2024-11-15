@@ -4,6 +4,10 @@ main: io.github.guy7cc.seikatsu.SeikatsuPlugin
 api-version: '1.21'
 
 commands:
+  seikatsu:
+    description: Op command.
+    permission: seikatsu.command.seikatsu
+    permission-message: You do not have permission to perform this command.
   sit:
     description: You can sit here.
     permission: seikatsu.command.sit
@@ -28,8 +32,15 @@ commands:
     description: Label the coordination where you are.
     permission: seikatsu.command.coord
     permission-message: You do not have permission to perform this command.
+  dealer:
+    description: Summon an original villager of this plugin.
+    permission: seikatsu.command.dealer
+    permission-message: You do not have permission to perform this command.
 
 permissions:
+  seikatsu.command.seikatsu:
+    description: Op command.
+    default: op
   seikatsu.command.sit:
     description: You can sit here.
     default: true
@@ -47,4 +58,7 @@ permissions:
     default: true
   seikatsu.command.coord:
     description: You can label the coordination.
+    default: true
+  seikatsu.command.dealer:
+    description: You can summon an original villager of this plugin.
     default: true

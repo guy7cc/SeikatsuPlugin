@@ -1,11 +1,13 @@
-package io.github.guy7cc.seikatsu.system;
+package io.github.guy7cc.seikatsu.player;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import io.github.guy7cc.seikatsu.system.Const;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class OfflinePlayerStatusManager {
     private final Map<String, OfflinePlayerStatus> map;
@@ -40,6 +42,11 @@ public class OfflinePlayerStatusManager {
 
     public OfflinePlayerStatus get(Player player){
         return map.get(player.getName());
+    }
+
+    public void computeIfPresent(Player player, Consumer<OfflinePlayerStatus> consumer){
+        OfflinePlayerStatus status = map.get(player.getName());
+        if(status != null) consumer.accept(status);
     }
 
     public void onPlayerJoin(Player player){

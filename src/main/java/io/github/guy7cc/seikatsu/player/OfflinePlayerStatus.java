@@ -1,7 +1,8 @@
-package io.github.guy7cc.seikatsu.system;
+package io.github.guy7cc.seikatsu.player;
 
 import com.google.gson.JsonObject;
 import io.github.guy7cc.seikatsu.io.ExtendedJsonObjectWrapper;
+import io.github.guy7cc.seikatsu.system.Const;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

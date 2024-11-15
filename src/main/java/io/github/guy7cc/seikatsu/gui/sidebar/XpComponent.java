@@ -1,7 +1,7 @@
 package io.github.guy7cc.seikatsu.gui.sidebar;
 
 import io.github.guy7cc.seikatsu.SeikatsuPlugin;
-import io.github.guy7cc.seikatsu.system.OfflinePlayerStatus;
+import io.github.guy7cc.seikatsu.player.OfflinePlayerStatus;
 import org.bukkit.entity.Player;
 
 public class XpComponent extends SidebarComponent{

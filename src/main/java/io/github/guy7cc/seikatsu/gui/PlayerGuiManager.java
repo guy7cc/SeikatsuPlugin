@@ -1,7 +1,7 @@
 package io.github.guy7cc.seikatsu.gui;
 
 import io.github.guy7cc.seikatsu.SeikatsuPlugin;
-import io.github.guy7cc.seikatsu.system.OfflinePlayerStatus;
+import io.github.guy7cc.seikatsu.player.OfflinePlayerStatus;
 import io.github.guy7cc.seikatsu.system.Tickable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

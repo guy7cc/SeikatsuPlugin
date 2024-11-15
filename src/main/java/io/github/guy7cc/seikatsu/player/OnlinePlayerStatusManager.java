@@ -1,10 +1,12 @@
-package io.github.guy7cc.seikatsu.system;
+package io.github.guy7cc.seikatsu.player;
 
+import io.github.guy7cc.seikatsu.system.Tickable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class OnlinePlayerStatusManager implements Tickable {
     private final Map<Player, OnlinePlayerStatus> map = new HashMap<>();
@@ -17,6 +19,11 @@ public class OnlinePlayerStatusManager implements Tickable {
 
     public OnlinePlayerStatus get(Player player){
         return map.get(player);
+    }
+
+    public void computeIfPresent(Player player, Consumer<OnlinePlayerStatus> consumer){
+        OnlinePlayerStatus status = map.get(player);
+        if(status != null) consumer.accept(status);
     }
 
     @Override

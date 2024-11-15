@@ -4,12 +4,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.github.guy7cc.seikatsu.command.*;
-import io.github.guy7cc.seikatsu.event.BlockEventHandler;
-import io.github.guy7cc.seikatsu.event.EntityEventHandler;
-import io.github.guy7cc.seikatsu.event.PlayerEventHandler;
-import io.github.guy7cc.seikatsu.event.ServerEventHandler;
+import io.github.guy7cc.seikatsu.event.*;
 import io.github.guy7cc.seikatsu.gui.PlayerGuiManager;
+import io.github.guy7cc.seikatsu.gui.SelectInventoryManager;
 import io.github.guy7cc.seikatsu.io.GsonWrapper;
+import io.github.guy7cc.seikatsu.item.CooldownManager;
+import io.github.guy7cc.seikatsu.item.PlayerItemTicker;
+import io.github.guy7cc.seikatsu.player.OfflinePlayerStatusManager;
+import io.github.guy7cc.seikatsu.player.OnlinePlayerStatusManager;
 import io.github.guy7cc.seikatsu.system.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -21,6 +23,8 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -29,6 +33,7 @@ public final class SeikatsuPlugin extends JavaPlugin {
 
     public static final String PLUGIN_NAME = "SeikatsuPlugin";
     public static final String SHORT_NAME = "seikatsu";
+    public static final String NAMESPACE = "seikatsu";
 
     public static SeikatsuPlugin plugin;
 
@@ -38,7 +43,10 @@ public final class SeikatsuPlugin extends JavaPlugin {
     public static GeneralTicker ticker;
     public static OnlinePlayerStatusManager onlinePlayerStatus;
     public static OfflinePlayerStatusManager offlinePlayerStatus;
+    public static PlayerItemTicker playerItem;
+    public static CooldownManager cooldown;
     public static PlayerGuiManager playerGui;
+    public static SelectInventoryManager selectInventory;
     public static SeatTicker seat;
     public static MessageBarManager messageBar;
     public static CoordManager coord;
@@ -59,22 +67,28 @@ public final class SeikatsuPlugin extends JavaPlugin {
         timer = new ProfiledTimer();
         onlinePlayerStatus = new OnlinePlayerStatusManager();
         offlinePlayerStatus = new OfflinePlayerStatusManager();
+        cooldown = new CooldownManager();
+        playerItem = new PlayerItemTicker();
         playerGui = new PlayerGuiManager();
+        selectInventory = new SelectInventoryManager();
         seat = new SeatTicker();
         messageBar = new MessageBarManager();
         coord = new CoordManager();
         joinMessage = new ArrayList<>();
-        ticker = new GeneralTicker(timer, onlinePlayerStatus, playerGui, seat, messageBar);
+        ticker = new GeneralTicker(timer, onlinePlayerStatus, playerItem, playerGui, seat, messageBar, cooldown);
 
+        setupCommand("seikatsu", new SeikatsuCommand());
         setupCommand("sit", new SitCommand());
         setupCommand("hat", new HatCommand());
         setupCommand("info", new InfoCommand());
         setupCommand("addmsg", new AddMsgCommand());
         setupCommand("removemsg", new RemoveMsgCommand());
         setupCommand("coord", new CoordCommand());
+        setupCommand("dealer", new DealerCommand());
 
         PluginManager pluginManager = getServer().getPluginManager();
-        pluginManager.registerEvents(new PlayerEventHandler(onlinePlayerStatus, offlinePlayerStatus, playerGui), this);
+        pluginManager.registerEvents(new PlayerEventHandler(onlinePlayerStatus, offlinePlayerStatus, cooldown, playerGui), this);
+        pluginManager.registerEvents(new InventoryEventHandler(), this);
         pluginManager.registerEvents(new BlockEventHandler(), this);
         pluginManager.registerEvents(new EntityEventHandler(), this);
         pluginManager.registerEvents(new ServerEventHandler(), this);

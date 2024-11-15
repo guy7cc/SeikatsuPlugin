@@ -2,7 +2,7 @@ package io.github.guy7cc.seikatsu.command;
 
 import io.github.guy7cc.seikatsu.SeikatsuPlugin;
 import io.github.guy7cc.seikatsu.gui.PlayerGui;
-import io.github.guy7cc.seikatsu.system.OfflinePlayerStatus;
+import io.github.guy7cc.seikatsu.player.OfflinePlayerStatus;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
